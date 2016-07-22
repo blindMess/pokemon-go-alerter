@@ -24,14 +24,18 @@ class Notifier(object):
                 results[i] = ":tada: " + results[i]
             # Don't notify on COMMON pokemon
 	    if pokemon in COMMON and self.filterCommon == 1:
-		results[i] = None
-	
-	results = filter(None, results)
-        results = {'text': "Pokemon scan results:\n\n %s" % ('\n'.join(results))}
+		    results[i] = None
 
-	for service in self.services:
-            if service.get('webhook'):
-                r = requests.post(service.get('webhook'), data=json.dumps(results))
-                service['last_message'] = time.time()
-            else:
-                print 'Service not yet supported.'
+    	results = filter(None, results)
+
+        if len(results) != 0:
+            results = {'text': "Pokemon scan results:\n\n %s" % ('\n'.join(results))}
+            print results
+            for service in self.services:
+                if service.get('webhook'):
+                    r = requests.post(service.get('webhook'), data=json.dumps(results))
+                    service['last_message'] = time.time()
+                else:
+                    print 'Service not yet supported.'
+	else:
+	    print("[!] No Pokemon Found")

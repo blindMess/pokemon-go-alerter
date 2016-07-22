@@ -14,6 +14,8 @@ Your username and password need to be Pokemon Trainer Club credentials. Registra
 
 Location can be GPS coordinates or an address.
 
+To avoid spamming the channel with common Pokemon, set filterCommon to 1 and any Pokemon in the COMMON list in notifier.py will not be notified on.
+
 Several Slack channels can be configured with different message delays like so:
 
 ```
